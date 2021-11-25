@@ -13,10 +13,8 @@ const Base64 = require("crypto-js/enc-base64");
  * @returns HMAC-SHA256 hashed Signature (base64 encoded)
  */
 function sign(method, path, secret, timestamp, body) {
-  //console.log(method, path, secret, timestamp, body);
   const verb = method.toUpperCase();
   const contentHash = SHA256(body).toString(Base64);
-  //console.log("contentHash", contentHash);
   let strToBeSigned = `${verb}\n${path}\n${timestamp}\n${contentHash}`;
   return HmacSHA256(strToBeSigned, secret).toString(Base64);
 }
